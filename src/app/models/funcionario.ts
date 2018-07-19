@@ -1,0 +1,19 @@
+export interface Funcionario {
+    admissao?:string;
+    cargo?:string;
+    cpf?:string;
+    email?:string;
+    endereco?:{
+      logradouro?:string;
+      numero?:string;
+      apto?:string;
+      bairro?:string;
+      cidade?:string;
+      estado?:string;
+      pais?:string;
+    };
+    matricula?:string;
+    nascimento?:string;
+    nome?:string;
+    telefone?:string;
+  }

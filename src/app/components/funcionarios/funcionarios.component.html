@@ -1,0 +1,11 @@
+<div *ngIf="funcionarios?.length > 0;else noItems">
+  <ul *ngFor="let funcionario of funcionarios" class="collection">
+    <li class="collection-item"><strong>Nome: </strong><a [routerLink]="['/funcionario', funcionario.id]">{{funcionario.nome}}</a></li>
+    <li class="collection-item"><strong>Matricula: </strong>{{funcionario.matricula}}</li>
+  </ul>
+</div>
+
+<ng-template #noItems>
+  <hr>
+  <h5>Nenhum funcionário cadastrado.</h5>
+</ng-template>

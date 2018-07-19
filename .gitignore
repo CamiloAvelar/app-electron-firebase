@@ -4,6 +4,7 @@
 /dist
 /tmp
 /out-tsc
+/app-prefeitura-win32-x64
 
 # dependencies
 /node_modules
