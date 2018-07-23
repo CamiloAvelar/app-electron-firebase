@@ -18,14 +18,14 @@ export class FuncionariosService {
     //this.funcionarios = this.afs.collection('cadastro').valueChanges();
   }
 
-  getFuncionarioById(funcId) {
+  getFuncionarioById(funcId): Observable<Funcionario> {
     this.funcDoc = this.afs.doc('cadastro/'+funcId);
     this.func = this.funcDoc.valueChanges();
 
     return this.func;
   }
 
-  getFuncionarioByName(funcName) {
+  getFuncionarioByName(funcName): Observable<Funcionario[]> {
     this.funcionariosCollection = this.afs.collection('cadastro', ref => ref.where('nome', '==', funcName));
 
     this.funcionarios = this.funcionariosCollection.snapshotChanges().pipe(
@@ -38,7 +38,7 @@ export class FuncionariosService {
     return this.funcionarios;
   }
 
-  getFuncionarioByMatricula(funcMatricula) {
+  getFuncionarioByMatricula(funcMatricula): Observable<Funcionario[]> {
     this.funcionariosCollection = this.afs.collection('cadastro', ref => ref.where('matricula', '==', funcMatricula));
 
     this.funcionarios = this.funcionariosCollection.snapshotChanges().pipe(
@@ -51,7 +51,7 @@ export class FuncionariosService {
     return this.funcionarios;
   }
 
-  getFuncionarios(){
+  getFuncionarios(): Observable<Funcionario[]>{
     this.funcionariosCollection = this.afs.collection('cadastro');
 
     this.funcionarios = this.funcionariosCollection.snapshotChanges().pipe(
@@ -66,6 +66,16 @@ export class FuncionariosService {
 
   addFuncionario(funcionario: Funcionario){
     this.funcionariosCollection.add(funcionario);
+  }
+
+  deleteFuncionario(funcionario: Funcionario){
+    this.funcDoc = this.afs.doc(`cadastro/${funcionario.id}`);
+    this.funcDoc.delete();
+  }
+
+  updateFuncionario(funcionario: Funcionario) {
+    this.funcDoc = this.afs.doc(`cadastro/${funcionario.id}`);
+    this.funcDoc.update(funcionario);
   }
 
 }

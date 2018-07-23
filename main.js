@@ -5,8 +5,8 @@ let win;
 function createWindow () {
   // Create the browser window.
   win = new BrowserWindow({
-    width: 600, 
-    height: 600,
+    width: 1024, 
+    height: 768,
     backgroundColor: '#ffffff',
     icon: `file://${__dirname}/dist/angular-app/favicon.ico`
   })

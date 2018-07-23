@@ -9,24 +9,15 @@ import { Funcionario } from '../../models/Funcionario';
 })
 export class SearchFuncionarioComponent implements OnInit {
 
-  search: any;
+  searchText: any;
   funcionario: Funcionario[];
 
   constructor(private fService: FuncionariosService) { }
 
   ngOnInit() {
-  }
-
-  searchFuncionario(){
-    if(this.search.match(/^[0-9]+$/) === null){
-    this.fService.getFuncionarioByName(this.search).subscribe(funcionario => {
+    this.fService.getFuncionarios().subscribe(funcionario => {
       this.funcionario = funcionario;
     })
-    }else{
-      this.fService.getFuncionarioByMatricula(this.search).subscribe(funcionario => {
-        this.funcionario = funcionario;
-      })
-    }
   }
 
 }

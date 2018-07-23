@@ -1,13 +1,98 @@
-<ul class="collection">
-    <li class="collection-item"><strong>Nome: </strong>{{funcionario.nome}}</li>
-    <li class="collection-item"><strong>Matricula: </strong>{{funcionario.matricula}}</li>
-    <li class="collection-item"><strong>CPF: </strong>{{funcionario.cpf}}</li>
-    <li class="collection-item"><strong>Email: </strong>{{funcionario.email}}</li>
-    <li class="collection-item"><strong>Cargo: </strong>{{funcionario.cargo}}</li>
-</ul>
-<ul class="collection">
-        <li class="collection-item"><strong>Logradouro: </strong>{{funcionario.endereco.logradouro}}, {{funcionario.endereco.numero}}, {{funcionario.endereco.apto}}</li>
-        <li class="collection-item"><strong>Bairro: </strong>{{funcionario.endereco.bairro}}</li>
-        <li class="collection-item"><strong>Cidade: </strong>{{funcionario.endereco.cidade}}</li>
-        <li class="collection-item"><strong>Estado: </strong>{{funcionario.endereco.estado}}</li>
+<div class="row mt6">
+    <div class="col m6">
+        <a routerLink="/" class="btn btn-link">
+        <i class="fa fa-arrow-circle-o-left"></i> Voltar
+        </a>
+    </div>
+    <div class="col m6">
+        <div class="btn-group pull-right">
+        <a (click)="edit = !edit" class="btn indigo darken-3"><i class="fa fa-pencil"></i> Editar</a>
+        <button (click)="onDeleteClick()" class="btn red darken-1"><i class="fa fa-trash"></i> Deletar</button>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="funcionario && !edit">
+    <ul class="collection">
+        <li class="collection-item"><strong>Nome: </strong>{{funcionario.nome}}</li>
+        <li class="collection-item"><strong>Matricula: </strong>{{funcionario.matricula}}</li>
+        <li class="collection-item"><strong>CPF: </strong>{{funcionario.cpf}}</li>
+        <li class="collection-item"><strong>Email: </strong>{{funcionario.email}}</li>
+        <li class="collection-item"><strong>Cargo: </strong>{{funcionario.cargo}}</li>
+        <li class="collection-item"><strong>Data de nascimento: </strong>{{funcionario.nascimento}}</li>
     </ul>
+    <ul class="collection">
+        <li class="collection-item"><strong>Endereço: </strong>{{funcionario.endereco.logradouro}}, {{funcionario.endereco.numero}}<span *ngIf="funcionario.endereco.apto != ''">, apto {{funcionario.endereco.apto}}</span>, {{funcionario.endereco.bairro}}, {{funcionario.endereco.cidade}} - {{funcionario.endereco.estado}}</li>
+    </ul>
+</div>
+
+<div class="card" *ngIf="edit">
+        <div class="card-content">
+          <h5>Editar Funcionário</h5>
+          <hr>
+          <span class="card-title">Dados pessoais</span>
+          <form (submit)="onSubmit()" class="col s6">
+            <div class="row">
+              <div class="input-field col s6">
+                <input type="text" placeholder="Nome" [(ngModel)]="funcionario.nome" name="nome" required>
+              </div>
+              <div class="input-field col s6">
+                  <input type="text" placeholder="CPF" [(ngModel)]="funcionario.cpf" name="cpf">
+              </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                  <input type="text" placeholder="Email" [(ngModel)]="funcionario.email" name="email">
+                </div>
+                <div class="input-field col s6">
+                    <input type="text" placeholder="Telefone" [(ngModel)]="funcionario.telefone" name="telefone">
+                  </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <span class="helper-text" data-error="wrong" data-success="right">Data de Nascimento</span>
+                  <input type="date" [(ngModel)]="funcionario.nascimento" name="nascimento">
+                </div>
+                <div class="input-field col s6">
+                    <span class="helper-text" data-error="wrong" data-success="right">Data de Admissão</span>
+                    <input type="date" [(ngModel)]="funcionario.admissao" name="admissao">
+                </div>
+              </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input type="text" placeholder="Matricula" [(ngModel)]="funcionario.matricula" name="matricula">
+                </div>
+                <div class="input-field col s6">
+                    <input type="text" placeholder="Cargo" [(ngModel)]="funcionario.cargo" name="cargo">
+                </div>
+            </div>
+            <span class="card-title">Endereço</span>
+            <div class="row">
+                <div class="input-field col s8">
+                  <input type="text" placeholder="Endereço" [(ngModel)]="funcionario.endereco.logradouro" name="logradouro">
+                </div>
+                <div class="input-field col s2">
+                    <input type="text" placeholder="Número" [(ngModel)]="funcionario.endereco.numero" name="numero">
+                </div>
+                <div class="input-field col s2">
+                    <input type="text" placeholder="Apto" [(ngModel)]="funcionario.endereco.apto" name="apto">
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s4">
+                    <input type="text" placeholder="Bairro" [(ngModel)]="funcionario.endereco.bairro" name="bairro">
+                </div>
+                <div class="input-field col s4">
+                    <input type="text" placeholder="Cidade" [(ngModel)]="funcionario.endereco.cidade" name="cidade">
+                </div>
+                <div class="input-field col s2">
+                    <input type="text" placeholder="Estado" [(ngModel)]="funcionario.endereco.estado" name="estado">
+                </div>
+                <div class="input-field col s2">
+                    <input type="text" placeholder="País" [(ngModel)]="funcionario.endereco.pais" name="pais">
+                </div>
+            </div>
+            <input type="submit" value="Editar" class="btn">
+          </form>
+        </div>
+      </div>

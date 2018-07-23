@@ -1,23 +1,35 @@
 <div class="card">
   <div class="card-content">
-    <form (submit)="searchFuncionario()" class="col s6">
+    <form class="col s6">
       <div class="row">
+        <span class="card-title">Digite o nome ou número de matrícula.</span>
         <div class="input-field">
-          <input placeholder="Pesquisar por nome ou número de matrícula" type="text" name="searchFuncionario" [(ngModel)]="search">
+          <input placeholder="Pesquisar por nome ou número de matrícula" type="text" name="searchFuncionario" [(ngModel)]="searchText">
         </div>
       </div>
-      <input type="submit" value="Submit" class="btn">
     </form>
-  </div>
-</div>
-
-<div class="card" *ngIf="funcionario?.length > 0">
-  <div class="card-content" *ngFor="let funcionario of funcionario">
-    <strong>Nome: </strong><a [routerLink]="['/funcionario', funcionario.id]">{{funcionario.nome}}</a>
   </div>
 </div>
 
 <div *ngIf="funcionario?.length === 0">
     <hr>
-    <h5>Nenhum funcionário encontrado com esses dados.</h5>
+    <h5>Nenhum funcionário encontrado.</h5>
 </div>
+
+<table *ngIf="funcionario?.length > 0" class="table striped centered">
+    <thead class="thead-inverse">
+      <tr>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Matrícula</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let funcionario of funcionario | filter : searchText">
+        <td>{{ funcionario.nome }}</td>
+        <td>{{ funcionario.email }}</td>
+        <td>{{ funcionario.matricula }}</td>
+        <td><a [routerLink]="['/funcionario', funcionario.id]" class="btn btn-secondary btn-sm"><i class="fa fa-arrow-circle-o-right"></i> Detalhes</a></td>
+      </tr>
+    </tbody>
+  </table>

@@ -1,4 +1,5 @@
 export interface Funcionario {
+    id?:string;
     admissao?:string;
     cargo?:string;
     cpf?:string;

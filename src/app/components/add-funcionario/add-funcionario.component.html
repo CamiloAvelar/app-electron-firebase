@@ -1,21 +1,15 @@
 <div class="card">
   <div class="card-content">
-    <span class="card-title">Cadastrar Funcionário</span>
+    <h5>Cadastrar Funcionário</h5>
+    <hr>
+    <span class="card-title">Dados pessoais</span>
     <form (submit)="onSubmit()" class="col s6">
       <div class="row">
         <div class="input-field col s6">
-          <input type="text" placeholder="Nome" [(ngModel)]="funcionario.nome" name="nome">
+          <input type="text" placeholder="Nome" [(ngModel)]="funcionario.nome" name="nome" required>
         </div>
         <div class="input-field col s6">
             <input type="text" placeholder="CPF" [(ngModel)]="funcionario.cpf" name="cpf">
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s6">
-          <input type="date" [(ngModel)]="funcionario.nascimento" name="nascimento">
-        </div>
-        <div class="input-field col s6">
-            <input type="date" [(ngModel)]="funcionario.admissao" name="admissao">
         </div>
       </div>
       <div class="row">
@@ -23,10 +17,54 @@
             <input type="text" placeholder="Email" [(ngModel)]="funcionario.email" name="email">
           </div>
           <div class="input-field col s6">
-              <input type="text" placeholder="Matricula" [(ngModel)]="funcionario.matricula" name="matricula">
+              <input type="text" placeholder="Telefone" [(ngModel)]="funcionario.telefone" name="telefone">
+            </div>
+      </div>
+      <div class="row">
+          <div class="input-field col s6">
+              <span class="helper-text" data-error="wrong" data-success="right">Data de Nascimento</span>
+            <input type="date" [(ngModel)]="funcionario.nascimento" name="nascimento">
+          </div>
+          <div class="input-field col s6">
+              <span class="helper-text" data-error="wrong" data-success="right">Data de Admissão</span>
+              <input type="date" [(ngModel)]="funcionario.admissao" name="admissao">
           </div>
         </div>
-      <input type="submit" value="Submit" class="btn">
+      <div class="row">
+          <div class="input-field col s6">
+              <input type="text" placeholder="Matricula" [(ngModel)]="funcionario.matricula" name="matricula">
+          </div>
+          <div class="input-field col s6">
+              <input type="text" placeholder="Cargo" [(ngModel)]="funcionario.cargo" name="cargo">
+          </div>
+      </div>
+      <span class="card-title">Endereço</span>
+      <div class="row">
+          <div class="input-field col s8">
+            <input type="text" placeholder="Endereço" [(ngModel)]="funcionario.endereco.logradouro" name="logradouro">
+          </div>
+          <div class="input-field col s2">
+              <input type="text" placeholder="Número" [(ngModel)]="funcionario.endereco.numero" name="numero">
+          </div>
+          <div class="input-field col s2">
+              <input type="text" placeholder="Apto" [(ngModel)]="funcionario.endereco.apto" name="apto">
+          </div>
+      </div>
+      <div class="row">
+          <div class="input-field col s4">
+              <input type="text" placeholder="Bairro" [(ngModel)]="funcionario.endereco.bairro" name="bairro">
+          </div>
+          <div class="input-field col s4">
+              <input type="text" placeholder="Cidade" [(ngModel)]="funcionario.endereco.cidade" name="cidade">
+          </div>
+          <div class="input-field col s2">
+              <input type="text" placeholder="Estado" [(ngModel)]="funcionario.endereco.estado" name="estado">
+          </div>
+          <div class="input-field col s2">
+              <input type="text" placeholder="País" [(ngModel)]="funcionario.endereco.pais" name="pais">
+          </div>
+      </div>
+      <input type="submit" value="Cadastrar" class="btn">
     </form>
   </div>
 </div>
