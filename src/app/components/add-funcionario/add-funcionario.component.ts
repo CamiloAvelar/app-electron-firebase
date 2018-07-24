@@ -23,6 +23,14 @@ export class AddFuncionarioComponent implements OnInit {
       estado:'Minas Gerais',
       pais:'Brasil'
     },
+    localtrab:{
+      logradouro:'',
+      numero:'',
+      bairro:'',
+      cidade:'Ponte Nova',
+      estado:'Minas Gerais',
+      pais:'Brasil'
+    },
     matricula:'',
     nascimento:'',
     nome:'',
@@ -55,6 +63,14 @@ export class AddFuncionarioComponent implements OnInit {
         logradouro:'',
         numero:'',
         apto:'',
+        bairro:'',
+        cidade:'Ponte Nova',
+        estado:'Minas Gerais',
+        pais:'Brasil'
+      },
+      localtrab:{
+        logradouro:'',
+        numero:'',
         bairro:'',
         cidade:'Ponte Nova',
         estado:'Minas Gerais',

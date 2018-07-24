@@ -37,6 +37,7 @@ export class NavbarComponent implements OnInit {
       cssClass: 'teal accent-3 center-align',
       timeout: 4000
     });
+    this.isLoggedIn = false;
     this.router.navigate(['/login']);
   }
 

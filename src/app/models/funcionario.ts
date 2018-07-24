@@ -13,6 +13,14 @@ export interface Funcionario {
       estado?:string;
       pais?:string;
     };
+    localtrab?:{
+      logradouro?:string;
+      numero?:string;
+      bairro?:string;
+      cidade?:string;
+      estado?:string;
+      pais?:string;
+    };
     matricula?:string;
     nascimento?:string;
     nome?:string;

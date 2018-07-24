@@ -5,11 +5,11 @@ let win;
 function createWindow () {
   // Create the browser window.
   win = new BrowserWindow({
-    width: 1024, 
-    height: 768,
+    width: 1200, 
+    height: 800,
     backgroundColor: '#ffffff',
     icon: `file://${__dirname}/dist/angular-app/favicon.ico`
-  })
+  });
 
 
   win.loadURL(`file://${__dirname}/dist/angular-app/index.html`)
@@ -21,6 +21,8 @@ function createWindow () {
   win.on('closed', function () {
     win = null
   })
+
+  win.maximize(true);
 }
 
 // Create window on electron intialization

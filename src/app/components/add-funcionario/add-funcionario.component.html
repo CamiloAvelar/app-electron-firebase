@@ -38,7 +38,7 @@
               <input type="text" placeholder="Cargo" [(ngModel)]="funcionario.cargo" name="cargo">
           </div>
       </div>
-      <span class="card-title">Endereço</span>
+      <span class="card-title">Endereço residencial</span>
       <div class="row">
           <div class="input-field col s8">
             <input type="text" placeholder="Endereço" [(ngModel)]="funcionario.endereco.logradouro" name="logradouro">
@@ -62,6 +62,29 @@
           </div>
           <div class="input-field col s2">
               <input type="text" placeholder="País" [(ngModel)]="funcionario.endereco.pais" name="pais">
+          </div>
+      </div>
+      <span class="card-title">Local de trabalho</span>
+      <div class="row">
+          <div class="input-field col s8">
+            <input type="text" placeholder="Endereço" [(ngModel)]="funcionario.localtrab.logradouro" name="trablogradouro">
+          </div>
+          <div class="input-field col s4">
+              <input type="text" placeholder="Número" [(ngModel)]="funcionario.localtrab.numero" name="trabnumero">
+          </div>
+      </div>
+      <div class="row">
+          <div class="input-field col s4">
+              <input type="text" placeholder="Bairro" [(ngModel)]="funcionario.localtrab.bairro" name="trabbairro">
+          </div>
+          <div class="input-field col s4">
+              <input type="text" placeholder="Cidade" [(ngModel)]="funcionario.localtrab.cidade" name="trabcidade">
+          </div>
+          <div class="input-field col s2">
+              <input type="text" placeholder="Estado" [(ngModel)]="funcionario.localtrab.estado" name="trabestado">
+          </div>
+          <div class="input-field col s2">
+              <input type="text" placeholder="País" [(ngModel)]="funcionario.localtrab.pais" name="trabpais">
           </div>
       </div>
       <input type="submit" value="Cadastrar" class="btn">

@@ -6,24 +6,138 @@
     </div>
     <div class="col m6">
         <div class="btn-group pull-right">
-        <a (click)="edit = !edit" class="btn indigo darken-3"><i class="fa fa-pencil"></i> Editar</a>
+        <a (click)="edit = !edit" [ngClass]="edit ? 'hide' : 'btn indigo darken-3'"><i class="fa fa-pencil"></i> Editar</a>
         <button (click)="onDeleteClick()" class="btn red darken-1"><i class="fa fa-trash"></i> Deletar</button>
         </div>
     </div>
 </div>
 
+<div class="row mt6">
+        <div class="col right">
+            <div class="btn-group m6 pull-right">
+            <a (click)="addAtestado = !addAtestado" [ngClass]="addAtestado ? 'btn red darken-3' : 'btn indigo darken-3'"><i class="fa fa-plus"></i> Adicionar Atestado</a>
+            </div>
+            <div class="btn-group m6 pull-right">
+            <a (click)="addFerias = !addFerias" [ngClass]="addFerias ? 'btn red darken-3' : 'btn indigo darken-3'"><i class="fa fa-plus"></i> Adicionar Férias</a>
+            </div>
+            <div class="btn-group m6 pull-right">
+            <a (click)="addFeriasPremio = !addFeriasPremio" [ngClass]="addFeriasPremio ? 'btn red darken-3' : 'btn indigo darken-3'"><i class="fa fa-plus"></i> Adicionar Férias Prêmio</a>
+            </div>
+        </div>
+    </div>
+
+<div *ngIf="addAtestado">
+    <div class="card">
+        <form (submit)="onAtestadoSubmit()">
+            <span class="card-title">Adicionar Atestado: </span>
+            <p>Data do atestado</p>
+            <div class="input-field col s6">
+                <input type="date" placeholder="Data" [(ngModel)]="atestado.data" name="data">
+            </div>
+            <div class="input-field col s6">
+                <input type="text" placeholder="Duração (em dias)" [(ngModel)]="atestado.duracao" name="duracao">
+            </div>
+            <input type="submit" value="Adicionar" class="btn">
+        </form>
+    </div>
+</div>
+
+<div *ngIf="addFerias">
+    <div class="card">
+        <span class="card-title">Adicionar Férias: </span>
+        <form (submit)="onFeriasSubmit()">
+            <div class="input-field col s6">
+                <p>Data de Início: </p>
+                <input type="date" [(ngModel)]="ferias.inicio" name="inicio">
+            </div>
+            <div class="input-field col s6">
+                <p>Data de Término: </p>
+                <input type="date" [(ngModel)]="ferias.fim" name="fim">
+            </div>
+            <input type="submit" value="Adicionar" class="btn">
+        </form>
+    </div>
+</div>
+
+<div *ngIf="addFeriasPremio">
+    <div class="card">
+        <span class="card-title">Adicionar Férias Prêmio: </span>
+        <form (submit)="onFeriasPremioSubmit()">
+            <div class="input-field col s6">
+                <p>Data de Início: </p>
+                <input type="date" [(ngModel)]="feriasPremio.inicio" name="inicio">
+            </div>
+            <div class="input-field col s6">
+                <p>Data de Término: </p>
+                <input type="date" [(ngModel)]="feriasPremio.fim" name="fim">
+            </div>
+            <input type="submit" value="Adicionar" class="btn">
+        </form>
+    </div>
+</div>
+
 <div *ngIf="funcionario && !edit">
-    <ul class="collection">
-        <li class="collection-item"><strong>Nome: </strong>{{funcionario.nome}}</li>
-        <li class="collection-item"><strong>Matricula: </strong>{{funcionario.matricula}}</li>
-        <li class="collection-item"><strong>CPF: </strong>{{funcionario.cpf}}</li>
-        <li class="collection-item"><strong>Email: </strong>{{funcionario.email}}</li>
-        <li class="collection-item"><strong>Cargo: </strong>{{funcionario.cargo}}</li>
-        <li class="collection-item"><strong>Data de nascimento: </strong>{{funcionario.nascimento}}</li>
-    </ul>
-    <ul class="collection">
-        <li class="collection-item"><strong>Endereço: </strong>{{funcionario.endereco.logradouro}}, {{funcionario.endereco.numero}}<span *ngIf="funcionario.endereco.apto != ''">, apto {{funcionario.endereco.apto}}</span>, {{funcionario.endereco.bairro}}, {{funcionario.endereco.cidade}} - {{funcionario.endereco.estado}}</li>
-    </ul>
+    <div class="row">
+        <div class="col s12">
+            <div class="card">
+                <span class="card-title center-align">{{ funcionario.nome }}</span>
+                <ul class="collection">
+                    <li class="collection-item col s6"><strong>Matricula: </strong>{{funcionario.matricula}}</li>
+                    <li class="collection-item col s6"><strong>CPF: </strong>{{funcionario.cpf}}</li>
+                    <li class="collection-item col s6"><strong>Email: </strong>{{funcionario.email}}</li>
+                    <li class="collection-item col s6"><strong>Cargo: </strong>{{funcionario.cargo}}</li>
+                    <li class="collection-item col s6"><strong>Data de nascimento: </strong>{{funcionario.nascimento | date: 'dd/MM/yyyy'}}</li>
+                    <li class="collection-item col s6"><strong>Data de admissão: </strong>{{funcionario.admissao | date: 'dd/MM/yyyy'}}</li>
+                </ul>
+                <ul class="collection">
+                    <li class="collection-item"><strong>Endereço residencial: </strong>{{funcionario.endereco.logradouro}}, {{funcionario.endereco.numero}}<span *ngIf="funcionario.endereco.apto != ''">, apto {{funcionario.endereco.apto}}</span>, {{funcionario.endereco.bairro}}, {{funcionario.endereco.cidade}} - {{funcionario.endereco.estado}}</li>
+                    <li class="collection-item"><strong>Local de trabalho: </strong>{{funcionario.localtrab.logradouro}}, {{funcionario.localtrab.numero}}, {{funcionario.localtrab.bairro}}, {{funcionario.localtrab.cidade}} - {{funcionario.localtrab.estado}}</li>
+                </ul>
+            </div>
+            <div class="card col s12" *ngIf="atestados?.length > 0" (dblclick)="showAtestado = !showAtestado">
+                <span class="card-title">Atestados: </span>
+                <span class="card-title right"><span class="new badge" data-badge-caption="cadastrado(s)">{{ atestados.length }}</span> <i (click)="showAtestado = !showAtestado" [ngClass]="showAtestado ? 'fa fa-arrow-up black-text right' : 'fa fa-arrow-down black-text right'"></i></span>
+                <div class="wrapper" [ngClass]="showAtestado ? 'show' : 'hide'">
+                <ul class="collection" *ngFor="let atestado of atestados">
+                    <li class="collection-item"><strong>Data: </strong>{{atestado.data | date: 'dd/MM/yyyy'}}<button (click)="onDeleteAtestadoClick(atestado.id)" class="darken-1 right"><i class="fa fa-trash"></i></button></li>
+                    <li class="collection-item"><strong>Duração: </strong>{{atestado.duracao}} dias</li>
+                </ul>
+                </div>
+            </div>
+            <div class="col s12" *ngIf="atestados?.length == 0">
+                    <hr>
+                    <p class="center-align">Nenhum atestado cadastrado!</p>
+                </div>
+            <div class="card col s6" *ngIf="feriasArray?.length > 0" (dblclick)="showFerias = !showFerias">
+                <span class="card-title">Férias: </span>
+                <span class="card-title right"><span class="new badge" data-badge-caption="cadastrada(s)">{{ feriasArray.length }}</span> <i (click)="showFerias = !showFerias" [ngClass]="showFerias ? 'fa fa-arrow-up black-text right' : 'fa fa-arrow-down black-text right'"></i></span>
+                <div class="wrapper" [ngClass]="showFerias ? 'show' : 'hide'">
+                <ul class="collection" *ngFor="let ferias of feriasArray">
+                    <li class="collection-item"><strong>Data Início: </strong>{{ferias.inicio | date: 'dd/MM/yyyy'}}<button (click)="onDeleteFeriasClick(ferias.id)" class="darken-1 right"><i class="fa fa-trash"></i></button></li>
+                    <li class="collection-item"><strong>Data Fim: </strong>{{ferias.fim | date: 'dd/MM/yyyy'}}</li>
+                </ul>
+                </div>
+            </div>
+            <div class="col s6" *ngIf="feriasArray?.length == 0">
+                    <hr>
+                    <p>Nenhuma férias cadastrada!</p>
+                </div>
+            <div class="card col s6" *ngIf="feriasPremioArray?.length > 0" (dblclick)="showFeriasPremio = !showFeriasPremio">
+                <span class="card-title">Férias Prêmio: </span>
+                <span class="card-title right"><span class="new badge" data-badge-caption="cadastrada(s)">{{ feriasPremioArray.length }}</span> <i (click)="showFeriasPremio = !showFeriasPremio" [ngClass]="showFeriasPremio ? 'fa fa-arrow-up black-text right' : 'fa fa-arrow-down black-text right'"></i></span>
+                <div class="wrapper" [ngClass]="showFeriasPremio ? 'show' : 'hide'">
+                <ul class="collection" *ngFor="let feriasPremio of feriasPremioArray">
+                    <li class="collection-item"><strong>Data Início: </strong>{{feriasPremio.inicio | date: 'dd/MM/yyyy'}}<button (click)="onDeleteFeriasPremioClick(feriasPremio.id)" class="darken-1 right"><i class="fa fa-trash"></i></button></li>
+                    <li class="collection-item"><strong>Data Fim: </strong>{{feriasPremio.fim | date: 'dd/MM/yyyy'}}</li>
+                </ul>
+                </div>
+            </div>
+            <div class="col s6" *ngIf="feriasPremioArray?.length == 0">
+                <hr>
+                <p>Nenhuma férias prêmio cadastrada!</p>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="card" *ngIf="edit">
@@ -92,7 +206,31 @@
                     <input type="text" placeholder="País" [(ngModel)]="funcionario.endereco.pais" name="pais">
                 </div>
             </div>
+            <span class="card-title">Local de trabalho</span>
+            <div class="row">
+                <div class="input-field col s8">
+                  <input type="text" placeholder="Endereço" [(ngModel)]="funcionario.localtrab.logradouro" name="trablogradouro">
+                </div>
+                <div class="input-field col s4">
+                    <input type="text" placeholder="Número" [(ngModel)]="funcionario.localtrab.numero" name="trabnumero">
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s4">
+                    <input type="text" placeholder="Bairro" [(ngModel)]="funcionario.localtrab.bairro" name="trabbairro">
+                </div>
+                <div class="input-field col s4">
+                    <input type="text" placeholder="Cidade" [(ngModel)]="funcionario.localtrab.cidade" name="trabcidade">
+                </div>
+                <div class="input-field col s2">
+                    <input type="text" placeholder="Estado" [(ngModel)]="funcionario.localtrab.estado" name="trabestado">
+                </div>
+                <div class="input-field col s2">
+                    <input type="text" placeholder="País" [(ngModel)]="funcionario.localtrab.pais" name="trabpais">
+                </div>
+            </div>
             <input type="submit" value="Editar" class="btn">
+            <a (click)="edit = !edit" class="btn indigo darken-3"><i class="fa fa-times"></i> Cancelar</a>
           </form>
         </div>
       </div>
